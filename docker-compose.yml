@@ -4,10 +4,9 @@ services:
   database:
     container_name: kupipodariday-database
     image: postgres:15-alpine
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
       PGDATA: ${POSTGRES_PGDATA}
     volumes:
       - postgres_data:${POSTGRES_PGDATA}
@@ -21,14 +20,11 @@ services:
       context: ./backend/kupipodariday-backend
     ports:
       - "4000:3000"
+    env_file:
+      - .env
     environment:
-      JWT_SECRET: ${JWT_SECRET}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_HOST: database
       POSTGRES_PORT: 5432
-      POSTGRES_PGDATA: ${POSTGRES_PGDATA}
       PORT: 3000
       NODE_ENV: production
     depends_on:
