@@ -9,7 +9,7 @@ services:
     environment:
       PGDATA: ${POSTGRES_PGDATA}
     volumes:
-      - postgres_data:${POSTGRES_PGDATA}
+      - postgres_data:/var/lib/postgresql/data/pgdata
     restart: unless-stopped
     networks:
       - app-network
@@ -19,14 +19,15 @@ services:
     build:
       context: ./backend/kupipodariday-backend
     ports:
-      - "4000:3000"
+      - "4000:4000"
     env_file:
       - .env
     environment:
       POSTGRES_HOST: database
       POSTGRES_PORT: 5432
-      PORT: 3000
+      PORT: 4000
       NODE_ENV: production
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:8081,https://sirazovdenis.nomorepartiessbs.ru}
     depends_on:
       - database
     restart: unless-stopped

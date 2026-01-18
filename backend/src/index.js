@@ -4,11 +4,9 @@ const cors = require('cors');
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Environment variables validation
 const requiredEnvVars = [
   'JWT_SECRET',
   'POSTGRES_PASSWORD',
@@ -24,7 +22,6 @@ if (missingVars.length > 0) {
   process.exit(1);
 }
 
-// Database configuration from environment variables
 const dbConfig = {
   host: process.env.POSTGRES_HOST,
   port: 5432,
@@ -33,16 +30,11 @@ const dbConfig = {
   password: process.env.POSTGRES_PASSWORD,
 };
 
-// JWT configuration
 const jwtSecret = process.env.JWT_SECRET;
 
-// Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend is running' });
 });
-
-// API routes would go here
-// Example: app.use('/api', apiRoutes);
 
 const PORT = process.env.PORT || 3000;
 

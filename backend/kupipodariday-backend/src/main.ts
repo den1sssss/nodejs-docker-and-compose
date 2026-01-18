@@ -8,7 +8,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const logger = new Logger('Bootstrap');
 
-  // Глобальная валидация
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -21,8 +20,10 @@ async function bootstrap() {
     }),
   );
 
-  // CORS настройки
-  const corsOrigins = configService.get<string>('CORS_ORIGINS', 'http://localhost:3000,http://localhost:3001,http://localhost:3002').split(',');
+  const corsOrigins = configService.get<string>(
+    'CORS_ORIGINS',
+    'http://localhost:3000,http://localhost:3001,http://localhost:3002,http://localhost:8081,https://sirazovdenis.nomorepartiessbs.ru'
+  ).split(',');
   app.enableCors({
     origin: corsOrigins,
     credentials: true,

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 
-// Backend API URL - должен быть изменен на домен бэкенда
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 function App() {
