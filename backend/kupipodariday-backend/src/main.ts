@@ -16,7 +16,7 @@ async function bootstrap() {
       transformOptions: {
         enableImplicitConversion: true,
       },
-      disableErrorMessages: configService.get<string>('NODE_ENV') === 'production',
+      disableErrorMessages: false,
     }),
   );
 

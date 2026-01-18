@@ -4,6 +4,7 @@ import {
   MinLength,
   MaxLength,
   IsOptional,
+  ValidateIf,
 } from 'class-validator';
 
 export class SignUpDto {
@@ -23,7 +24,7 @@ export class SignUpDto {
   @IsString()
   avatar?: string;
 
-  @IsOptional()
+  @ValidateIf((o) => o.about !== undefined && o.about !== '')
   @IsString()
   @MinLength(2)
   @MaxLength(200)

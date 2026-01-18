@@ -19,6 +19,12 @@ export class AuthController {
   @Post('signup')
   @HttpCode(HttpStatus.CREATED)
   async signup(@Body() signUpDto: SignUpDto) {
+    if (signUpDto.about === '') {
+      signUpDto.about = undefined;
+    }
+    if (signUpDto.avatar === '') {
+      signUpDto.avatar = undefined;
+    }
     return this.authService.signup(signUpDto);
   }
 

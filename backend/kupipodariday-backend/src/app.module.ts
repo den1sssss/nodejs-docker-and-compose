@@ -24,7 +24,7 @@ import { AuthModule } from './auth/auth.module';
         password: configService.get<string>('POSTGRES_PASSWORD', 'student'),
         database: configService.get<string>('POSTGRES_DB', 'kupipodariday'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: configService.get<string>('NODE_ENV') !== 'production',
+        synchronize: true,
         logging: configService.get<string>('NODE_ENV') === 'development',
       }),
       inject: [ConfigService],
